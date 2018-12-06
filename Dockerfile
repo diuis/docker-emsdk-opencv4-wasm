@@ -1,8 +1,9 @@
-FROM diuis/docker-emsdk-opencv4:v1.0.1
+FROM diuis/docker-emsdk-opencv4:v1.1.10
 
 USER root
 RUN mkdir /opencv_wasm && chown appuser /opencv_wasm
 
 USER appuser
+SHELL ["/bin/bash", "-c"]
 RUN source /emsdk/emsdk_env.sh && \
-    python /opencv/opencv-4.0.0/platforms/js/build_js.py /opencv_wasm --build_wasm --emscripten_dir=/emsdk/emscripten/1.38.20
+    python /opencv/opencv-4.0.0/platforms/js/build_js.py --build_wasm /opencv_wasm
